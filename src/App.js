@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import GameLogic from './game.js'
 
-const winningLines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
+
 
 function Square(props) {
   return (
@@ -22,11 +14,6 @@ function Square(props) {
   );
 }
 
-
-// var gameState = {
-//   const squares = Array(9).fill(null);
-//   const humanTurn = true;
-// }
 
 
 class Board extends Component{
@@ -41,7 +28,7 @@ class Board extends Component{
 
   handleClick(i) {
     const squares = this.state.squares.slice();
-    if (checkWin(squares) || squares[i]) {
+    if (GameLogic.checkWin(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.humanTurn ? 'X' : 'O';
@@ -63,10 +50,14 @@ class Board extends Component{
 
 
   render(){
-    const winner = checkWin(this.state.squares);
+    const winner = GameLogic.checkWin(this.state.squares);
+    const tie = GameLogic.checkTie(this.state.squares);
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
+    }
+    if (tie) {
+      status = 'Tie';
     }
     else {
       status = 'Next player: ' + (this.state.humanTurn ? 'X' : 'O');
@@ -96,32 +87,18 @@ class Board extends Component{
 
 }
 
-function checkWin(squares){
-  for(let i=0; i < winningLines.length; i++){
-    const [a, b, c] = winningLines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
-      return squares[a];
-    }
-  }
-  return null;
-}
 
-// function checkTie(squares){
-//   if(emptySquares().length == 0){
-//     return true;
-//   }
-//   return;
-// }
 
-/*function emptySquares(squares){
+
+function emptySquares(squares){
   const empty = [];
   for(let i=0; i < 9; i++){
-    if ( squares[i] === 0){
+    if ( squares[i] === null){
       empty.push(i);
     }
   }
   return empty;
-}*/
+}
 
 
 class App extends Component {
