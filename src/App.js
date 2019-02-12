@@ -16,6 +16,8 @@ function Square(props) {
 
 
 
+
+
 class Board extends Component{
 
   constructor(props) {
@@ -48,6 +50,15 @@ class Board extends Component{
     );
   }
 
+  clearBoard = () => {
+    var squares = this.state.squares.slice();
+    squares = Array(9).fill(null)
+    this.setState({
+      squares: squares,
+      humanTurn: true,
+    });
+  }
+
 
   render(){
     const winner = GameLogic.checkWin(this.state.squares);
@@ -56,7 +67,7 @@ class Board extends Component{
     if (winner) {
       status = 'Winner: ' + winner;
     }
-    if (tie) {
+    else if (tie) {
       status = 'Tie';
     }
     else {
@@ -80,6 +91,9 @@ class Board extends Component{
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
+        </div>
+        <div className="button-container">
+        <button onClick={this.clearBoard}>New Game</button>
         </div>
       </div>
     );
