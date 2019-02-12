@@ -32,12 +32,13 @@ class Board extends Component{
     if (GameLogic.checkWin(squares) || squares[i]) {
       return;
     }
-    squares[i] = 'X';
+    squares[i] = this.state.humanTurn ? GameLogic.humanPlayer : GameLogic.aiPlayer;
     this.setState({
       squares: squares,
       humanTurn: !this.state.humanTurn,
     });
   }
+
 
 
   renderSquare(i) {

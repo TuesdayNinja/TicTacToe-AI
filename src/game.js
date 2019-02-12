@@ -9,6 +9,9 @@ const winningLines = [
     [2, 4, 6],
   ];
 
+const aiPlayer = 'O'
+const humanPlayer = 'X'
+
 
   function checkWin(squares){
   for(let i=0; i < winningLines.length; i++){
@@ -43,5 +46,7 @@ export default {
   winningLines,
   checkWin,
   checkTie,
-  emptySquares
+  emptySquares,
+  aiPlayer,
+  humanPlayer
 };
