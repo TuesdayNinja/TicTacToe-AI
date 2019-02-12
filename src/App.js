@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import GameLogic from './game.js'
+import AI from './AI.js'
 
 
 
@@ -13,8 +14,6 @@ function Square(props) {
     </button>
   );
 }
-
-
 
 
 
@@ -33,7 +32,7 @@ class Board extends Component{
     if (GameLogic.checkWin(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.humanTurn ? 'X' : 'O';
+    squares[i] = 'X';
     this.setState({
       squares: squares,
       humanTurn: !this.state.humanTurn,
