@@ -9,8 +9,8 @@ const winningLines = [
     [2, 4, 6],
   ];
 
-const aiPlayer = 'O'
-const humanPlayer = 'X'
+const aiPlayer = 'O';
+const humanPlayer = 'X';
 
 
   function checkWin(squares){

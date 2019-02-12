@@ -36,8 +36,14 @@ class Board extends Component{
     this.setState({
       squares: squares,
       humanTurn: !this.state.humanTurn,
+    }, () => {
+      this.setState({
+        squares: AI.turnChecker({squares: this.state.squares.slice(), humanTurn: !this.state.humanTurn})
+      })
+      console.log(squares);
     });
   }
+
 
 
 
