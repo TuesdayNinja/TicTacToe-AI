@@ -7,13 +7,13 @@ function turnChecker(squares, humanTurn){
 	if(!humanTurn){
 		return randomMove(squares);
 	}
-	return;
+	return squares;
 }
 
 function randomMove(squares){
  var availableSquares = GameLogic.emptySquares(squares);
     if (GameLogic.checkWin(squares) || GameLogic.checkTie(squares)) {
-      return;
+      return squares;
     }
     var randomIndex = availableSquares[Math.floor(Math.random() * availableSquares.length)];
     squares[randomIndex] = GameLogic.aiPlayer;

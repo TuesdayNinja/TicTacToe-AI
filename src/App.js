@@ -32,13 +32,14 @@ class Board extends Component{
     if (GameLogic.checkWin(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.humanTurn ? GameLogic.humanPlayer : GameLogic.aiPlayer;
+    squares[i] = GameLogic.humanPlayer;
     this.setState({
       squares: squares,
-      humanTurn: !this.state.humanTurn,
+      humanTurn: false,
     }, () => {
       this.setState({
-        squares: AI.turnChecker({squares: this.state.squares.slice(), humanTurn: !this.state.humanTurn})
+        squares: AI.turnChecker(this.state.squares.slice(), false),
+        humanTurn: true,
       })
       console.log(squares);
     });
