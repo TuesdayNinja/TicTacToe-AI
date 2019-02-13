@@ -2,22 +2,28 @@
 
 import GameLogic from './game.js'
 
-
+//calls movemaking function if it is AIs turn.
 function turnChecker(squares, humanTurn){
-	if(!humanTurn){
-		return randomMove(squares);
+	//Finds avaible square indexes
+	var availableSquares = GameLogic.emptySquares(squares);
+	//Checks if it is AI turn and if game is not yet won or tied
+	if(!(humanTurn) && !(GameLogic.checkWin(squares) || GameLogic.checkTie(squares))){
+		return randomMove(squares, availableSquares);
 	}
 	return squares;
 }
 
-function randomMove(squares){
- var availableSquares = GameLogic.emptySquares(squares);
-    if (GameLogic.checkWin(squares) || GameLogic.checkTie(squares)) {
-      return squares;
-    }
+//Returns random free square index
+function randomMove(squares, availableSquares){
+    //Picks random square index to make move in
     var randomIndex = availableSquares[Math.floor(Math.random() * availableSquares.length)];
     squares[randomIndex] = GameLogic.aiPlayer;
     return squares;
+}
+
+//Returns best free square index
+function minimax(squares){
+
 }
 
 
