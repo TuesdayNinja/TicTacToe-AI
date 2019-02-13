@@ -21,6 +21,7 @@ const humanPlayer = 'X';
     }
   }
   return null;
+
 }
 
 function emptySquares(squares){

@@ -16,7 +16,6 @@ function Square(props) {
 }
 
 
-
 class Board extends Component{
 
   constructor(props) {
@@ -27,26 +26,27 @@ class Board extends Component{
     };
   }
 
+  //Sets gamemoves to squares
   handleClick(i) {
     const squares = this.state.squares.slice();
+    //Checks if game is already played
     if (GameLogic.checkWin(squares) || squares[i]) {
       return;
     }
+    //Sets humans move to picked square
     squares[i] = GameLogic.humanPlayer;
     this.setState({
       squares: squares,
       humanTurn: false,
     }, () => {
+      //Sets AIs move to picked square
       this.setState({
         squares: AI.turnChecker(this.state.squares.slice(), false),
         humanTurn: true,
       })
-      console.log(squares);
+      //console.log(squares);
     });
   }
-
-
-
 
   renderSquare(i) {
     return (
@@ -57,6 +57,7 @@ class Board extends Component{
     );
   }
 
+  //empties square indexes for new game
   clearBoard = () => {
     var squares = this.state.squares.slice();
     squares = Array(9).fill(null)
@@ -106,19 +107,6 @@ class Board extends Component{
     );
   }
 
-}
-
-
-
-
-function emptySquares(squares){
-  const empty = [];
-  for(let i=0; i < 9; i++){
-    if ( squares[i] === null){
-      empty.push(i);
-    }
-  }
-  return empty;
 }
 
 
