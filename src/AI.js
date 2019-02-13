@@ -70,7 +70,7 @@ function minimax(squares, player){
 		}
 
 		//reset spot to be empty
-		squares[i] = null;
+		squares[availableSquares[i]] = null;
 
 		//store object to array
 		moves.push(move);
@@ -96,12 +96,11 @@ function minimax(squares, player){
 		}
 	}
 
-	console.log(moves[bestMoveIndex]);
-	//Eli tää nyt ilmeisesti palauttaa objectin
+	//returns object
     return moves[bestMoveIndex];
 }
 
-//Tällä tarkoitus yrittää saada se indeksi sieltä objectista
+//gets index out of object
 function bestMove(squares){
  var bestMove = minimax(squares, GameLogic.aiPlayer);
  squares = squares.slice();
