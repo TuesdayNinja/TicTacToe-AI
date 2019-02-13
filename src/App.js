@@ -9,11 +9,11 @@ import AI from './AI.js'
 
 function Square(props) {
   return (
-    <button
+    <div
       className="square"
       onClick={props.onClick}>
         {props.value}
-    </button>
+    </div>
   );
 }
 
@@ -81,19 +81,24 @@ class Board extends Component{
     const winner = GameLogic.checkWin(this.state.squares);
     const tie = GameLogic.checkTie(this.state.squares);
     let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
+    if (winner == 'X') {
+      status = 'You won!';
+    }
+    else if (winner == 'O') {
+      status = 'You lost.';
     }
     else if (tie) {
       status = 'Tie';
     }
     else {
-      status = 'Next player: ' + (this.state.humanTurn ? 'X' : 'O');
+      status = '';
     }
 
     return(
       <div>
+
         <div className="status">{status}</div>
+
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -109,19 +114,20 @@ class Board extends Component{
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
-        <div className="button-container">
-        <button onClick={this.clearBoard}>New Game</button>
-        </div>
+        <button className ="button" onClick={this.clearBoard}>New Game</button>
+
+
         <div>
           <ToggleButtonGroup
             type="radio"
             name="options"
             defaultValue={1}
             onChange={this.onChange}>
-            <ToggleButton value={1}>Minimax</ToggleButton>
-            <ToggleButton value={2}>Random</ToggleButton>
+            <ToggleButton className="radio-button" value={1}>Minimax</ToggleButton>
+            <ToggleButton className="radio-button" value={2}>Random</ToggleButton>
           </ToggleButtonGroup>
         </div>
+
       </div>
     );
   }
@@ -134,6 +140,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="header">Tic Tac Toe</div>
         <div className="board">
           <Board/>
         </div>
