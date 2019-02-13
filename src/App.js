@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
 import './App.css';
 import GameLogic from './game.js'
 import AI from './AI.js'
@@ -23,6 +25,7 @@ class Board extends Component{
     this.state = {
       squares: Array(9).fill(null),
       humanTurn: true,
+      calledFunction: 1,
     };
   }
 
@@ -41,7 +44,7 @@ class Board extends Component{
     }, () => {
       //Sets AIs move to picked square
       this.setState({
-        squares: AI.turnChecker(this.state.squares.slice(), false),
+        squares: AI.turnChecker(this.state.squares.slice(), false, this.state.calledFunction),
         humanTurn: true,
       })
       //console.log(squares);
@@ -67,6 +70,12 @@ class Board extends Component{
     });
   }
 
+  onChange = (i) => {
+    //this.clearBoard;
+    this.setState({
+      calledFunction: i,
+    });
+  }
 
   render(){
     const winner = GameLogic.checkWin(this.state.squares);
@@ -102,6 +111,16 @@ class Board extends Component{
         </div>
         <div className="button-container">
         <button onClick={this.clearBoard}>New Game</button>
+        </div>
+        <div>
+          <ToggleButtonGroup
+            type="radio"
+            name="options"
+            defaultValue={1}
+            onChange={this.onChange}>
+            <ToggleButton value={1}>Minimax</ToggleButton>
+            <ToggleButton value={2}>Random</ToggleButton>
+          </ToggleButtonGroup>
         </div>
       </div>
     );

@@ -1,3 +1,5 @@
+//Tic-tac-toe rules
+
 const winningLines = [
     [0, 1, 2],
     [3, 4, 5],

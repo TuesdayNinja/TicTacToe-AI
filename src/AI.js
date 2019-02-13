@@ -2,22 +2,25 @@
 
 import GameLogic from './game.js'
 
-//for the minimax
-var depht = 0;
-
 //calls movemaking function if it is AIs turn.
-function turnChecker(squares, humanTurn){
+function turnChecker(squares, humanTurn, calledFunction){
 	//Finds avaible square indexes
 	var availableSquares = GameLogic.emptySquares(squares);
 
 	//Checks if it is AI turn and if game is not yet won or tied
 	if(!(humanTurn) && !(GameLogic.checkWin(squares) || GameLogic.checkTie(squares))){
 
-		//Calls funktion making random moves
-		//return randomMove(squares, availableSquares);
 
+		if(calledFunction==1){
 		//Calls funktion using minimax
 		return bestMove(squares);
+		}
+
+		if(calledFunction==2){
+		//Calls funktion making random moves
+		return randomMove(squares, availableSquares);
+		}
+
 
 	}
 	return squares;
@@ -33,7 +36,6 @@ function randomMove(squares, availableSquares){
 
 //Returns best free square index
 function minimax(squares, player){
-	depht++;
 
 	squares = squares.slice();
 
@@ -111,15 +113,6 @@ function bestMove(squares){
 
 
 
-
-
-
-
-
-
-
 export default {
 	turnChecker,
-	randomMove,
-	minimax,
 };
