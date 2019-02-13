@@ -35,6 +35,8 @@ function randomMove(squares, availableSquares){
 function minimax(squares, player){
 	depht++;
 
+	squares = squares.slice();
+
 	var availableSquares = GameLogic.emptySquares(squares);
 
 	//check scores
@@ -101,8 +103,10 @@ function minimax(squares, player){
 
 //Tällä tarkoitus yrittää saada se indeksi sieltä objectista
 function bestMove(squares){
-	var bestMove = minimax(squares, GameLogic.aiPlayer);
-	return bestMove.index;
+ var bestMove = minimax(squares, GameLogic.aiPlayer);
+ squares = squares.slice();
+ squares[bestMove.index] = GameLogic.aiPlayer;
+ return squares;
 }
 
 
